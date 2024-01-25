@@ -4,16 +4,14 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   ${({ theme }) => css`
     flex: 1;
-    justify-content: center;
-    align-items: center;
     background-color: ${theme.colors.background};
   `}
 `;
 
-export const Title = styled.Text`
+export const Header = styled.View`
   ${({ theme }) => css`
-    font-size: 24px;
-    font-weight: bold;
-    color: ${theme.colors.primary};
+    width: 100%;
+    height: 278px;
+    background-color: ${theme.colors.primary};
   `}
 `;
