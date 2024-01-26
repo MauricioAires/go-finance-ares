@@ -7,10 +7,11 @@ import {
 } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
+import { View } from "react-native";
 
 import { Dashboard } from "./src/screens/Dashboard";
 import { light } from "./src/global/styles/theme";
-import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -45,15 +46,18 @@ export default function App() {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-      onLayout={onLayoutRootView}
-    >
-      <ThemeProvider theme={light}>
-        <Dashboard />
-      </ThemeProvider>
-    </View>
+    <>
+      <View
+        style={{
+          flex: 1,
+        }}
+        onLayout={onLayoutRootView}
+      >
+        <ThemeProvider theme={light}>
+          <Dashboard />
+        </ThemeProvider>
+      </View>
+      <StatusBar backgroundColor="#5636d3" style="light" />
+    </>
   );
 }
