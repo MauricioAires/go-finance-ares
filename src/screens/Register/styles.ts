@@ -32,7 +32,7 @@ export const Form = styled.View`
   flex: 1;
 
   width: 100%;
-  padding: 24px;
+  padding: 20px 16px;
 
   justify-content: space-between;
 `;
