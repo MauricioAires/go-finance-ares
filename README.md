@@ -11,6 +11,8 @@ O projeto Go Finance, é uma aplicação get started com React Native para o ger
 - [Styled Components](https://styled-components.com/docs/basics)
 - [React Native Responsive Font Size](https://www.npmjs.com/package/react-native-responsive-fontsize)
 - [React Native Safe Area Context](https://github.com/th3rdwave/react-native-safe-area-context)
+- [React Native Gesture Handler](https://www.npmjs.com/package/react-native-gesture-handler)
+- [React Hook Form](https://www.react-hook-form.com/)
 
 ## Instalação
 
