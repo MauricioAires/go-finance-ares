@@ -10,6 +10,7 @@ import * as Font from "expo-font";
 import { View } from "react-native";
 
 import { Dashboard } from "./src/screens/Dashboard";
+import { Register } from "./src/screens/Register";
 import { light } from "./src/global/styles/theme";
 import { StatusBar } from "expo-status-bar";
 
@@ -54,7 +55,7 @@ export default function App() {
         onLayout={onLayoutRootView}
       >
         <ThemeProvider theme={light}>
-          <Dashboard />
+          <Register />
         </ThemeProvider>
       </View>
       <StatusBar backgroundColor="#5636d3" style="light" />
