@@ -3,11 +3,12 @@ import * as S from "./styles";
 
 export interface ButtonProps extends RectButtonProps {
   title: string;
+  onPress: () => void;
 }
 
-export function Button({ title, ...rest }: ButtonProps) {
+export function Button({ onPress, title, ...rest }: ButtonProps) {
   return (
-    <S.Container {...rest}>
+    <S.Container onPress={onPress} {...rest}>
       <S.Title>{title}</S.Title>
     </S.Container>
   );

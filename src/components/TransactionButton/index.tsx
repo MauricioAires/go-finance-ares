@@ -20,11 +20,13 @@ export function TransactionButton({
   };
 
   return (
-    <S.Container {...rest} isActive={isActive} type={type}>
-      <S.Icon name={icons[type]} type={type} />
-      <S.Title isActive={isActive} type={type}>
-        {title}
-      </S.Title>
+    <S.Container isActive={isActive} type={type}>
+      <S.Button {...rest}>
+        <S.Icon name={icons[type]} type={type} />
+        <S.Title isActive={isActive} type={type}>
+          {title}
+        </S.Title>
+      </S.Button>
     </S.Container>
   );
 }

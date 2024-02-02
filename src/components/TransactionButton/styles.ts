@@ -21,24 +21,25 @@ const containerModifiers = {
   },
 };
 
-export const Container = styled(RectButton)<TransactionOProps>`
+export const Container = styled.View<TransactionOProps>`
   ${({ theme, isActive, type }) => css`
     max-width: 100%;
 
     flex: 1;
 
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
     border: 1.5px solid ${theme.colors.text};
 
     border-radius: 5px;
 
-    padding: 16px;
-
     ${isActive && containerModifiers.variant[type](theme)}
   `}
+`;
+
+export const Button = styled(RectButton)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
 `;
 
 const iconModifiers = {
