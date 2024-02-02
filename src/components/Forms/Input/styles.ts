@@ -1,9 +1,9 @@
-import { TextInput } from "react-native";
+import { TextInput, ColorValue } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import styled, { css } from "styled-components/native";
 
 export const Input = styled(TextInput).attrs((props) => ({
-  placeholderTextColor: String(props.theme.colors.text),
+  placeholderTextColor: props.theme.colors.text as ColorValue,
 }))`
   ${({ theme }) => css`
     width: 100%;
