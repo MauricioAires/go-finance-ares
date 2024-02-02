@@ -7,11 +7,13 @@ import * as S from "./styles";
 interface InputControlledProps extends InputProps {
   control: Control;
   name: string;
+  error: string | undefined;
 }
 
 export function InputControlled({
   control,
   name,
+  error,
   ...rest
 }: InputControlledProps) {
   return (
@@ -23,6 +25,8 @@ export function InputControlled({
           <Input onChangeText={onChange} value={value} {...rest} />
         )}
       ></Controller>
+
+      {error && <S.Erro>{error}</S.Erro>}
     </S.Container>
   );
 }
