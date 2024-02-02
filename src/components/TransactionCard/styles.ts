@@ -28,10 +28,10 @@ export const Title = styled.Text`
 
 const amountModifiers = {
   color: {
-    positive: (theme: DefaultTheme) => css`
+    income: (theme: DefaultTheme) => css`
       color: ${theme.colors.success};
     `,
-    negative: (theme: DefaultTheme) => css`
+    outcome: (theme: DefaultTheme) => css`
       color: ${theme.colors.attention};
     `,
   },

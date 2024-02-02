@@ -1,7 +1,7 @@
 import { categories } from "../../utils/categories";
 import * as S from "./styles";
 
-export type TransactionCardVariantType = "positive" | "negative";
+export type TransactionCardVariantType = "income" | "outcome";
 export interface TransactionCardItem {
   id: string;
   type: TransactionCardVariantType;
@@ -24,7 +24,7 @@ export function TransactionCard({
     <S.Container>
       <S.Title> {title} </S.Title>
       <S.Amount type={type}>
-        {type === "negative" && "- "}
+        {type === "outcome" && "- "}
         {amount}
       </S.Amount>
 

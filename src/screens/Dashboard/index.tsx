@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native";
+import { useTheme } from "styled-components";
 
 import { HighlightCard } from "../../components/HighlightCard";
 import {
@@ -10,25 +11,19 @@ import {
 } from "../../components/TransactionCard";
 
 import * as S from "./styles";
-import { useTheme } from "styled-components";
+import { dateFormatter } from "../../utils/formatters/date-formatter";
+import { currencyFormatter } from "../../utils/formatters/currency-formatter";
+import { lastTransactionMapper } from "../../utils/mappers/last-transaction-mapper";
 
 interface Total {
   amount: string;
+  lastTransaction: string;
 }
 
 interface HighlightData {
   entries: Total;
   expensive: Total;
   total: Total;
-}
-
-function currencyFormat(value: number) {
-  return Number(value)
-    .toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    })
-    .toString();
 }
 
 export function Dashboard() {
@@ -43,34 +38,31 @@ export function Dashboard() {
     setIsLoading(true);
     const data = await AsyncStorage.getItem(collectionKey);
 
-    const currentTransactions = data ? JSON.parse(data!) : [];
+    const currentTransactions = data
+      ? (JSON.parse(data!) as TransactionCardItem[])
+      : [];
 
     let entriesSumTotal = 0;
     let expensiveTotal = 0;
 
     const mapperTransactions: TransactionCardItem[] = currentTransactions.map(
       (transaction: any) => {
-        if (transaction.transactionType === "income") {
+        if (transaction.type === "income") {
           entriesSumTotal += transaction.amount;
         } else {
           expensiveTotal += transaction.amount;
         }
 
-        const amount = currencyFormat(transaction.amount);
+        const amount = currencyFormatter(transaction.amount);
 
         const date = new Date(transaction.createdAt);
-        const createdAt = Intl.DateTimeFormat("pt-BR", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "2-digit",
-        }).format(date);
+        const createdAt = dateFormatter(date);
 
         return {
           id: transaction.id,
           categoryKey: transaction.category,
           title: transaction.name,
-          type:
-            transaction.transactionType === "income" ? "positive" : "negative",
+          type: transaction.type,
           amount,
           createdAt,
         };
@@ -78,15 +70,29 @@ export function Dashboard() {
     );
 
     setTransactions(mapperTransactions);
+
+    const lastTransactionIncome = lastTransactionMapper({
+      transactions: currentTransactions,
+      type: "income",
+    });
+
+    const lastTransactionOutcome = lastTransactionMapper({
+      transactions: currentTransactions,
+      type: "outcome",
+    });
+
     setHighlightData({
       entries: {
-        amount: currencyFormat(entriesSumTotal),
+        amount: currencyFormatter(entriesSumTotal),
+        lastTransaction: `Última entrada ${lastTransactionIncome}`,
       },
       expensive: {
-        amount: currencyFormat(expensiveTotal),
+        amount: currencyFormatter(expensiveTotal),
+        lastTransaction: `Última saída ${lastTransactionOutcome}`,
       },
       total: {
-        amount: currencyFormat(entriesSumTotal - expensiveTotal),
+        amount: currencyFormatter(entriesSumTotal - expensiveTotal),
+        lastTransaction: `01 á ${lastTransactionOutcome}`,
       },
     });
 
@@ -135,19 +141,19 @@ export function Dashboard() {
               type="up"
               title="Entradas"
               amount={highlightData.entries?.amount}
-              lastTransaction="Última entrada dia 13 de abril"
+              lastTransaction={highlightData.entries?.lastTransaction}
             />
             <HighlightCard
               type="down"
               title="Saídas"
               amount={highlightData.expensive?.amount}
-              lastTransaction="Última entrada dia 13 de abril"
+              lastTransaction={highlightData.expensive?.lastTransaction}
             />
             <HighlightCard
               type="total"
               title="Total"
               amount={highlightData.total?.amount}
-              lastTransaction="01 à 16 de abril"
+              lastTransaction={highlightData.total?.lastTransaction}
             />
           </S.HighlightCards>
 
