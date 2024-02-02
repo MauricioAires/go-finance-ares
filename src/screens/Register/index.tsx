@@ -94,8 +94,6 @@ export function Register() {
         newTransaction,
       ]);
 
-      console.log(JSON.stringify(JSON.parse(newCollectionData), null, 2));
-
       await AsyncStorage.setItem(collectionKey, newCollectionData);
 
       reset();
@@ -112,8 +110,6 @@ export function Register() {
   useEffect(() => {
     async function loadData() {
       const data = await AsyncStorage.getItem(collectionKey);
-
-      console.table(JSON.parse(data!));
     }
 
     loadData();

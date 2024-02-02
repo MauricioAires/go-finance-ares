@@ -4,13 +4,13 @@ export type HighlightCardType = "up" | "down" | "total";
 
 export interface HighlightCardProps {
   title: string;
-  amount: string;
+  amount?: string;
   lastTransaction: string;
   type: HighlightCardType;
 }
 
 export function HighlightCard({
-  amount,
+  amount = "",
   lastTransaction,
   title,
   type,

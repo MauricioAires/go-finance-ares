@@ -1,18 +1,13 @@
+import { categories } from "../../utils/categories";
 import * as S from "./styles";
 
-type Category = {
-  name: string;
-  icon: string;
-};
-
 export type TransactionCardVariantType = "positive" | "negative";
-
 export interface TransactionCardItem {
   id: string;
   type: TransactionCardVariantType;
   title: string;
   amount: string;
-  category: Category;
+  categoryKey: string;
   createdAt: string;
 }
 
@@ -21,8 +16,10 @@ export interface TransactionCardProps {
 }
 
 export function TransactionCard({
-  props: { amount, category, createdAt, title, type },
+  props: { amount, categoryKey, createdAt, title, type },
 }: TransactionCardProps) {
+  const [category] = categories.filter((item) => item.key === categoryKey);
+
   return (
     <S.Container>
       <S.Title> {title} </S.Title>
