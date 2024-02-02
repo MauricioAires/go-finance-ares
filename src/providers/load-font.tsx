@@ -8,7 +8,6 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
 
 interface LoadFontProviderProps {
   children: React.ReactNode;
