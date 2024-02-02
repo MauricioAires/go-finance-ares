@@ -15,6 +15,8 @@ O projeto Go Finance, é uma aplicação get started com React Native para o ger
 - [React Hook Form](https://www.react-hook-form.com/)
 - [Yup](https://github.com/jquense/yup)
 - [React Navigation](https://reactnavigation.org/)
+- [Async Storage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+- [React Native UUID](https://github.com/eugenehp/react-native-uuid)
 
 ## Instalação
 
