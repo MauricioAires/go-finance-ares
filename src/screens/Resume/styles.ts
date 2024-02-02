@@ -28,3 +28,11 @@ export const Title = styled.Text`
     font-size: ${RFValue(18)}px;
   `}
 `;
+export const Content = styled.ScrollView`
+  padding: 24px;
+  flex: 1;
+`;
+
+export const CategoriesList = styled.View`
+  gap: 6px;
+`;
