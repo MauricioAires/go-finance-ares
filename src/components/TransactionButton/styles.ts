@@ -1,5 +1,5 @@
 import styled, { css, DefaultTheme } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 import { Feather } from "@expo/vector-icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
@@ -21,7 +21,7 @@ const containerModifiers = {
   },
 };
 
-export const Container = styled(TouchableOpacity)<TransactionOProps>`
+export const Container = styled(RectButton)<TransactionOProps>`
   ${({ theme, isActive, type }) => css`
     max-width: 100%;
 

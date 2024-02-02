@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { FlatList, FlatListProps } from "react-native";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { Feather } from "@expo/vector-icons";
+import { BorderlessButton } from "react-native-gesture-handler";
 import {
   getBottomSpace,
   getStatusBarHeight,
@@ -68,6 +69,8 @@ export const UserName = styled.Text`
   `}
 `;
 
+export const LogoutButton = styled(BorderlessButton)``;
+
 export const Icon = styled(Feather)`
   ${({ theme }) => css`
     color: ${theme.colors.secondary};
@@ -93,6 +96,7 @@ export const Transactions = styled.View`
 
   margin-top: ${RFPercentage(12)}px;
 `;
+
 export const Title = styled.Text`
   ${({ theme }) => css`
     color: ${theme.colors.title};

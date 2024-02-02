@@ -4,7 +4,10 @@ import { Feather } from "@expo/vector-icons";
 /**
  * Preservar as funcionalidades dos botões dentro de um modal
  */
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  GestureHandlerRootView,
+  RectButton,
+} from "react-native-gesture-handler";
 
 export const Container = styled(GestureHandlerRootView)`
   ${({ theme }) => css`
@@ -38,7 +41,7 @@ interface CategoryProps {
   isActive: boolean;
 }
 
-export const Category = styled.TouchableOpacity<CategoryProps>`
+export const Category = styled(RectButton)<CategoryProps>`
   ${({ theme, isActive }) => css`
     width: 100%;
 

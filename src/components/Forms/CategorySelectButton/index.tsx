@@ -1,8 +1,8 @@
-import { TouchableOpacityProps } from "react-native";
+import { RectButtonProps } from "react-native-gesture-handler";
 
 import * as S from "./styles";
 
-export interface CategorySelectProps extends TouchableOpacityProps {
+export interface CategorySelectProps extends RectButtonProps {
   title: string;
 }
 
