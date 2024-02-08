@@ -5,6 +5,8 @@ import { VictoryPie } from "victory-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useTheme } from "styled-components";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { addMonths, format, subMonths } from "date-fns";
+import { ptBR } from "date-fns/locale/pt-BR";
 
 import { categories } from "../../utils/categories";
 import { currencyFormatter } from "../../utils/formatters/currency-formatter";
@@ -32,6 +34,7 @@ export interface Transaction {
 }
 
 export function Resume() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [transactionResume, setTransactionResume] = useState<CategoryCard[]>(
     [] as CategoryCard[],
   );
@@ -39,13 +42,34 @@ export function Resume() {
   const theme = useTheme();
   const bottomTabBarHeight = useBottomTabBarHeight();
 
+  function handleDateChange(action: "next" | "prev") {
+    if (action === "next") {
+      return setSelectedDate((state) => addMonths(state, 1));
+    }
+
+    setSelectedDate((state) => subMonths(state, 1));
+  }
+
   async function loadTransactions() {
     const collectionKey = "@goFinances:transactions";
     const response = await AsyncStorage.getItem(collectionKey);
-    const currentTransactions: Transaction[] = response
+    const transactionParse: Transaction[] = response
       ? JSON.parse(response!)
       : [];
 
+    const currentTransactions = transactionParse.filter((transaction) => {
+      const transactionMonth = new Date(transaction.createdAt).getMonth();
+      const transactionYear = new Date(transaction.createdAt).getFullYear();
+
+      const selectMonth = new Date(selectedDate).getMonth();
+      const selectedYear = new Date(selectedDate).getFullYear();
+      if (
+        transactionMonth === selectMonth &&
+        transactionYear === selectedYear
+      ) {
+        return transaction;
+      }
+    });
     /**
      *  Como definir
      *
@@ -91,7 +115,7 @@ export function Resume() {
   useFocusEffect(
     useCallback(() => {
       loadTransactions();
-    }, []),
+    }, [selectedDate]),
   );
 
   return (
@@ -106,6 +130,19 @@ export function Resume() {
           paddingBottom: bottomTabBarHeight,
         }}
       >
+        <S.MonthSelect>
+          <S.MonthSelectButton onPress={() => handleDateChange("prev")}>
+            <S.MonthSelectIcon name="chevron-left" />
+          </S.MonthSelectButton>
+          <S.Month>
+            {format(selectedDate, "MMMM , yyyy", {
+              locale: ptBR,
+            })}
+          </S.Month>
+          <S.MonthSelectButton onPress={() => handleDateChange("next")}>
+            <S.MonthSelectIcon name="chevron-right" />
+          </S.MonthSelectButton>
+        </S.MonthSelect>
         <S.ChartContainer>
           <VictoryPie
             data={transactionResume}
