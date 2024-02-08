@@ -85,7 +85,11 @@ export function Register() {
     };
 
     try {
-      const response = await AsyncStorage.getItem(collectionKey);
+      let response = await AsyncStorage.getItem(collectionKey);
+
+      if (response === null) {
+        response = JSON.stringify([]);
+      }
 
       const currentTransactions = JSON.parse(response!);
 
