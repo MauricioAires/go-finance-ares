@@ -36,3 +36,13 @@ export const Content = styled.ScrollView`
 export const CategoriesList = styled.View`
   gap: 6px;
 `;
+
+export const ChartContainer = styled.View`
+  width: 100%;
+  align-items: center;
+`;
+
+export const Month = styled.View``;
+export const MonthSelect = styled.View``;
+export const MonthSelectButton = styled.View``;
+export const SelectIcon = styled.View``;
