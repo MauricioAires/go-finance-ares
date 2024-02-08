@@ -18,6 +18,7 @@ O projeto Go Finance, é uma aplicação get started com React Native para o ger
 - [Async Storage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
 - [React Native UUID](https://github.com/eugenehp/react-native-uuid)
 - [Victory Native](https://www.npmjs.com/package/victory-native)
+- [React Native SVG Transformer](https://www.npmjs.com/package/react-native-svg-transformer?activeTab)
 
 ## Instalação
 
