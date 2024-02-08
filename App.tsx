@@ -5,6 +5,7 @@ import { NavigationContainerProvier } from "./src/providers/navigation-container
 import { ThemeProvider } from "./src/providers/theme";
 import { LoadFontProvider } from "./src/providers/load-font";
 import { GestureHandlerProvier } from "./src/providers/gesture-handler";
+import { SignIn } from "./src/screens/SignIn";
 
 export default function App() {
   return (
@@ -13,7 +14,8 @@ export default function App() {
         <ThemeProvider>
           <GestureHandlerProvier>
             <NavigationContainerProvier>
-              <AppRoutes />
+              {/* <AppRoutes /> */}
+              <SignIn />
             </NavigationContainerProvier>
           </GestureHandlerProvier>
         </ThemeProvider>
