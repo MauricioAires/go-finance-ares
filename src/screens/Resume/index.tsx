@@ -7,6 +7,7 @@ import { useTheme } from "styled-components";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { addMonths, format, subMonths } from "date-fns";
 import { ptBR } from "date-fns/locale/pt-BR";
+import { ActivityIndicator } from "react-native";
 
 import { categories } from "../../utils/categories";
 import { currencyFormatter } from "../../utils/formatters/currency-formatter";
@@ -34,6 +35,7 @@ export interface Transaction {
 }
 
 export function Resume() {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [transactionResume, setTransactionResume] = useState<CategoryCard[]>(
     [] as CategoryCard[],
@@ -51,6 +53,8 @@ export function Resume() {
   }
 
   async function loadTransactions() {
+    setIsLoading(true);
+
     const collectionKey = "@goFinances:transactions";
     const response = await AsyncStorage.getItem(collectionKey);
     const transactionParse: Transaction[] = response
@@ -110,6 +114,7 @@ export function Resume() {
     });
 
     setTransactionResume(totalByCategory);
+    setIsLoading(false);
   }
 
   useFocusEffect(
@@ -143,32 +148,41 @@ export function Resume() {
             <S.MonthSelectIcon name="chevron-right" />
           </S.MonthSelectButton>
         </S.MonthSelect>
-        <S.ChartContainer>
-          <VictoryPie
-            data={transactionResume}
-            colorScale={transactionResume.map((category) => category.color)}
-            style={{
-              labels: {
-                fontSize: RFValue(18),
-                fontWeight: "bold",
-                fill: theme.colors.shape,
-              },
-            }}
-            labelRadius={70}
-            x="percent"
-            y="total"
-          />
-        </S.ChartContainer>
-        <S.CategoriesList>
-          {transactionResume.map((category) => (
-            <HistoryCard
-              key={category.title}
-              title={category.title}
-              amount={category.totalFormatted}
-              color={category.color}
-            />
-          ))}
-        </S.CategoriesList>
+
+        {isLoading ? (
+          <S.LoadContainer>
+            <ActivityIndicator color={theme.colors.primary} size="large" />
+          </S.LoadContainer>
+        ) : (
+          <>
+            <S.ChartContainer>
+              <VictoryPie
+                data={transactionResume}
+                colorScale={transactionResume.map((category) => category.color)}
+                style={{
+                  labels: {
+                    fontSize: RFValue(18),
+                    fontWeight: "bold",
+                    fill: theme.colors.shape,
+                  },
+                }}
+                labelRadius={70}
+                x="percent"
+                y="total"
+              />
+            </S.ChartContainer>
+            <S.CategoriesList>
+              {transactionResume.map((category) => (
+                <HistoryCard
+                  key={category.title}
+                  title={category.title}
+                  amount={category.totalFormatted}
+                  color={category.color}
+                />
+              ))}
+            </S.CategoriesList>
+          </>
+        )}
       </S.Content>
     </S.Container>
   );
