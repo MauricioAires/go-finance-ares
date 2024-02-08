@@ -9,11 +9,11 @@ import {
   TransactionCard,
   TransactionCardItem,
 } from "../../components/TransactionCard";
-
-import * as S from "./styles";
 import { dateFormatter } from "../../utils/formatters/date-formatter";
 import { currencyFormatter } from "../../utils/formatters/currency-formatter";
 import { lastTransactionMapper } from "../../utils/mappers/last-transaction-mapper";
+
+import * as S from "./styles";
 
 interface Total {
   amount: string;
@@ -56,6 +56,7 @@ export function Dashboard() {
         const amount = currencyFormatter(transaction.amount);
 
         const date = new Date(transaction.createdAt);
+
         const createdAt = dateFormatter(date);
 
         return {
@@ -98,10 +99,6 @@ export function Dashboard() {
 
     setIsLoading(false);
   }
-
-  useEffect(() => {
-    loadTransactions();
-  }, []);
 
   useFocusEffect(
     useCallback(() => {

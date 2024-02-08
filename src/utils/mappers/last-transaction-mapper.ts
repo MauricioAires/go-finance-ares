@@ -20,9 +20,15 @@ export function lastTransactionMapper({
     .filter((item) => item.type === type)
     .map((item) => new Date(item.createdAt).getTime());
 
-  const lastTransactionsEntries = dateFormatter(
-    new Date(Math.max.apply(Math, timesTransactions)),
-  );
+  let lastTransactionsEntries;
+
+  if (!timesTransactions.length) {
+    lastTransactionsEntries = dateFormatter(new Date());
+  } else {
+    lastTransactionsEntries = dateFormatter(
+      new Date(Math.max.apply(Math, timesTransactions)),
+    );
+  }
 
   return lastTransactionsEntries;
 }
