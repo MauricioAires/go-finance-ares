@@ -20,6 +20,7 @@ O projeto Go Finance, é uma aplicação get started com React Native para o ger
 - [Victory Native](https://www.npmjs.com/package/victory-native)
 - [React Native SVG Transformer](https://www.npmjs.com/package/react-native-svg-transformer?activeTab)
 - [Babel Plugin Inline Dotenv](https://www.npmjs.com/package/babel-plugin-inline-dotenv)
+- [UI Avatars](https://ui-avatars.com/)
 
 ## Instalação
 
